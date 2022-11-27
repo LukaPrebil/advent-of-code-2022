@@ -6,7 +6,7 @@ impl<'a> ParseInput<'a, Day1, Part1> for AdventOfCode2021<Day1> {
     type Parsed = Vec<u32>;
 
     fn parse_input(&'a self, _input: &'a str) -> Self::Parsed {
-        vec![1, 2, 3]
+        _input.split(",").map(|s| s.parse().unwrap()).collect()
     }
 }
 
