@@ -10,7 +10,7 @@ fn main() {
         .skip(1)
         .next()
         .expect(
-            "Need a day to know which solution to run, e.g. `cargo run --example cli 1` to run day 1 solutions",
+            "Need a day to know which solution to run, e.g. `cargo run 1` to run day 1 solutions",
         )
         .parse()
         .expect("Unable to parse day, just use a number like `1`");
