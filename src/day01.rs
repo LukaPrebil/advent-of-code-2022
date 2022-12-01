@@ -1,37 +1,30 @@
-use advent_of_code_traits::{days::Day1, ParseInput, Part1, Part2, Solution};
 
-use super::AdventOfCode2021;
-
-impl<'a> ParseInput<'a, Day1, Part1> for AdventOfCode2021<Day1> {
-    type Parsed = Vec<u32>;
-
-    fn parse_input(&'a self, _input: &'a str) -> Self::Parsed {
-        _input.split(",").map(|s| s.parse().unwrap()).collect()
-    }
+pub fn parse_input_1(input: &str) -> Vec<Vec<u32>> {
+    input
+        .split("\n\n")
+        .map(|s| s.split("\n").map(|n| n.parse().unwrap()).collect())
+        .collect()
 }
 
-impl<'a> Solution<'a, Day1, Part1> for AdventOfCode2021<Day1> {
-    type Input = Vec<u32>;
-    type Output = u32;
-
-    fn solve(&'a self, input: &Self::Input) -> Self::Output {
-        input.iter().sum()
-    }
+pub fn solve_1(input: &Vec<Vec<u32>>) -> u32 {
+    input
+        .iter()
+        .map(|cals| cals.iter().sum::<u32>())
+        .max()
+        .unwrap()
 }
 
-impl<'a> ParseInput<'a, Day1, Part2> for AdventOfCode2021<Day1> {
-    type Parsed = &'a str;
-
-    fn parse_input(&'a self, input: &'a str) -> Self::Parsed {
-        input
-    }
+pub fn parse_input_2(input: &str) -> Vec<u32> {
+    input
+        .split("\n\n")
+        .map(|s| s.split("\n").map(|n| n.parse().unwrap()).collect())
+        .collect::<Vec<Vec<u32>>>()
+        .iter()
+        .map(|cals| cals.iter().sum())
+        .collect()
 }
 
-impl<'a> Solution<'a, Day1, Part2> for AdventOfCode2021<Day1> {
-    type Input = &'a str;
-    type Output = u32;
-
-    fn solve(&'a self, input: &Self::Input) -> Self::Output {
-        input.len() as u32
-    }
+pub fn solve_2(input: &mut Vec<u32>) -> u32 {
+    input.sort();
+    input.iter().rev().take(3).sum()
 }
