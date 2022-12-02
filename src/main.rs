@@ -20,7 +20,7 @@ fn main() {
             day01::solve_1(&day01::parse_input_1(&input)),
             day01::solve_2(&mut day01::parse_input_2(&input)),
         ),
-        2 => print_output(day, day02::solve_1(&input), day02::solve_2(&input)),
+        2 => print_output(day, day02::solve(&input, day02::get_round_score_1), day02::solve(&input, day02::get_round_score_2)),
 
         x => unimplemented!("no solution available for day {x}"),
     }

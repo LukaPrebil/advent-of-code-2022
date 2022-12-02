@@ -1,24 +1,16 @@
 use std::collections::HashMap;
 
-pub fn parse_input_1(input: &str) -> Vec<String> {
+pub fn parse_input(input: &str) -> Vec<String> {
     input.split("\n").map(|s| s.replace(" ", "")).collect()
 }
 
-pub fn solve_1(input: &str) -> u32 {
-    let parsed = parse_input_1(input);
-    parsed
+pub fn solve(input: &str, f: fn(String) -> u32) -> u32 {
+    parse_input(input)
         .iter()
-        .fold(0, |acc, round| acc + get_round_score_1(round.to_string()))
+        .fold(0, |acc, round| acc + f(round.to_string()))
 }
 
-pub fn solve_2(input: &str) -> u32 {
-    let parsed = parse_input_1(input);
-    parsed
-        .iter()
-        .fold(0, |acc, round| acc + get_round_score_2(round.to_string()))
-}
-
-fn get_round_score_1(round: String) -> u32 {
+pub fn get_round_score_1(round: String) -> u32 {
     let scores = HashMap::from([('X', 1), ('Y', 2), ('Z', 3)]);
     let mut score = 0;
 
@@ -63,7 +55,7 @@ fn get_round_score_1(round: String) -> u32 {
     score
 }
 
-fn get_round_score_2(round: String) -> u32 {
+pub fn get_round_score_2(round: String) -> u32 {
     let round_scores = HashMap::from([('X', 0), ('Y', 3), ('Z', 6)]);
     let mut score = 0;
 
