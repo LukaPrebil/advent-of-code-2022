@@ -1,4 +1,5 @@
 mod day01;
+mod day02;
 
 // https://github.com/drmason13/advent_of_code_traits/blob/d1ade7a19d41f9a509b034bb9de0cb9d631861e6/examples/cli/main.rs
 fn main() {
@@ -19,6 +20,7 @@ fn main() {
             day01::solve_1(&day01::parse_input_1(&input)),
             day01::solve_2(&mut day01::parse_input_2(&input)),
         ),
+        2 => print_output(day, day02::solve_1(&input), day02::solve_2(&input)),
 
         x => unimplemented!("no solution available for day {x}"),
     }
