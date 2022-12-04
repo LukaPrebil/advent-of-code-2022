@@ -1,6 +1,7 @@
 mod day01;
 mod day02;
 mod day03;
+mod day04;
 
 // https://github.com/drmason13/advent_of_code_traits/blob/d1ade7a19d41f9a509b034bb9de0cb9d631861e6/examples/cli/main.rs
 fn main() {
@@ -21,8 +22,17 @@ fn main() {
             day01::solve_1(&day01::parse_input_1(&input)),
             day01::solve_2(&mut day01::parse_input_2(&input)),
         ),
-        2 => print_output(day, day02::solve(&input, day02::get_round_score_1), day02::solve(&input, day02::get_round_score_2)),
+        2 => print_output(
+            day,
+            day02::solve(&input, day02::get_round_score_1),
+            day02::solve(&input, day02::get_round_score_2),
+        ),
         3 => print_output(day, day03::solve_1(&input), day03::solve_2(&input)),
+        4 => print_output(
+            day,
+            day04::solve(&input, day04::range_contains_other),
+            day04::solve(&input, day04::ranges_overlap),
+        ),
 
         x => unimplemented!("no solution available for day {x}"),
     }
