@@ -28,18 +28,10 @@ fn parse_input(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
 }
 
 fn build_stacks(stacks: &str) -> Vec<Vec<char>> {
-    let mut stack_vec: Vec<Vec<char>> = vec![
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-        Vec::new(),
-    ];
     let split_stacks: Vec<&str> = stacks.lines().rev().collect();
+    let len = split_stacks.last().unwrap().len();
+    let mut stack_vec: Vec<Vec<char>> = vec![Vec::new(); len];
+    
     for line in split_stacks {
         for (index, element) in line.char_indices() {
             if element != ' ' {
@@ -53,14 +45,21 @@ fn build_stacks(stacks: &str) -> Vec<Vec<char>> {
 pub fn solve(input: &str, should_reverse: bool) -> String {
     let (stacks, instructions) = parse_input(input);
     let mut result = "".to_string();
-    instructions.iter().fold(stacks, |mut stack, (how_many, from, to)| {
-        let stack_len = stack[*from as usize - 1].len();
-        let mut moved_items = stack[*from as usize - 1].split_off(stack_len - *how_many as usize);
-        if should_reverse { moved_items.reverse(); }
-        stack[*to as usize - 1].append(&mut moved_items);
-        stack
-    }).iter().for_each(|stack| {
-        result.push(*stack.last().unwrap());
-    });
+    instructions
+        .iter()
+        .fold(stacks, |mut stack, (how_many, from, to)| {
+            let stack_len = stack[*from as usize - 1].len();
+            let mut moved_items =
+                stack[*from as usize - 1].split_off(stack_len - *how_many as usize);
+            if should_reverse {
+                moved_items.reverse();
+            }
+            stack[*to as usize - 1].append(&mut moved_items);
+            stack
+        })
+        .iter()
+        .for_each(|stack| {
+            result.push(*stack.last().unwrap());
+        });
     result
 }
