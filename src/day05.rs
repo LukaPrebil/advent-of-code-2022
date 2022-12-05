@@ -4,17 +4,17 @@ fn parse_input(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
     let start = Instant::now();
     let mut split = input.split("\n\n");
     let stacks = split.next().unwrap();
-    let instructions = split.next().unwrap();
     let stacks_vec = build_stacks(stacks);
-    let instructions_vec: Vec<(u32, u32, u32)> = instructions
+
+    let instructions_vec: Vec<(u32, u32, u32)> = split
+        .next()
+        .unwrap()
         .lines()
         .map(|line| {
-            let formatted_line = line
-                .replace("from ", "")
-                .replace("move ", "")
-                .replace(" to", "");
+            let mut formatted_line = line.to_string();
+            formatted_line.retain(|c| c.is_numeric() || c == ' ');
 
-            let split_line: Vec<&str> = formatted_line.split(" ").collect();
+            let split_line: Vec<&str> = formatted_line.split_whitespace().collect();
 
             (
                 split_line[0].parse().unwrap(),
@@ -62,6 +62,10 @@ pub fn solve(input: &str, should_reverse: bool) -> String {
         .for_each(|stack| {
             result.push(*stack.last().unwrap());
         });
-    println!("solve with should_reverse={} took {}us", should_reverse, start.elapsed().as_micros());
+    println!(
+        "solve with should_reverse={} took {}us",
+        should_reverse,
+        start.elapsed().as_micros()
+    );
     result
 }
