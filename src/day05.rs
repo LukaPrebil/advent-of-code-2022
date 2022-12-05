@@ -23,7 +23,7 @@ fn parse_input(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
             )
         })
         .collect();
-    println!("parse_input: {:?}us", start.elapsed().as_micros());
+    println!("parse_input: {}us", start.elapsed().as_micros());
     (stacks_vec, instructions_vec)
 }
 
@@ -31,7 +31,7 @@ fn build_stacks(stacks: &str) -> Vec<Vec<char>> {
     let split_stacks: Vec<&str> = stacks.lines().rev().collect();
     let len = split_stacks.last().unwrap().len();
     let mut stack_vec: Vec<Vec<char>> = vec![Vec::new(); len];
-    
+
     for line in split_stacks {
         for (index, element) in line.char_indices() {
             if element != ' ' {
@@ -45,6 +45,7 @@ fn build_stacks(stacks: &str) -> Vec<Vec<char>> {
 pub fn solve(input: &str, should_reverse: bool) -> String {
     let (stacks, instructions) = parse_input(input);
     let mut result = "".to_string();
+    let start = Instant::now();
     instructions
         .iter()
         .fold(stacks, |mut stack, (how_many, from, to)| {
@@ -61,5 +62,6 @@ pub fn solve(input: &str, should_reverse: bool) -> String {
         .for_each(|stack| {
             result.push(*stack.last().unwrap());
         });
+    println!("solve with should_reverse={} took {}us", should_reverse, start.elapsed().as_micros());
     result
 }
