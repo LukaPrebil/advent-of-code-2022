@@ -2,6 +2,9 @@ mod day01;
 mod day02;
 mod day03;
 mod day04;
+mod day05;
+
+use std::time::Instant;
 
 // https://github.com/drmason13/advent_of_code_traits/blob/d1ade7a19d41f9a509b034bb9de0cb9d631861e6/examples/cli/main.rs
 fn main() {
@@ -16,6 +19,7 @@ fn main() {
 
     let input = std::fs::read_to_string(&find_input(day)).expect("no input available for that day");
 
+    let start = Instant::now();
     match day {
         1 => print_output(
             day,
@@ -33,9 +37,11 @@ fn main() {
             day04::solve(&input, day04::range_contains_other),
             day04::solve(&input, day04::ranges_overlap),
         ),
+        5 => print_output(day, day05::solve(&input, true), day05::solve(&input, false)),
 
         x => unimplemented!("no solution available for day {x}"),
     }
+    println!("Time: {}us", start.elapsed().as_micros());
 }
 
 fn find_input(day: u32) -> String {
