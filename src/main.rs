@@ -3,6 +3,7 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
 
 use std::time::Instant;
 
@@ -38,6 +39,7 @@ fn main() {
             day04::solve(&input, day04::ranges_overlap),
         ),
         5 => print_output(day, day05::solve(&input, true), day05::solve(&input, false)),
+        6 => print_output(day, day06::solve(&input, 4), day06::solve(&input, 14)),
 
         x => unimplemented!("no solution available for day {x}"),
     }
