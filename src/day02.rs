@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 pub fn parse_input(input: &str) -> Vec<String> {
-    input.split("\n").map(|s| s.replace(" ", "")).collect()
+    input.split('\n').map(|s| s.replace(' ', "")).collect()
 }
 
 pub fn solve(input: &str, f: fn(String) -> u32) -> u32 {
@@ -14,7 +14,7 @@ pub fn get_round_score_1(round: String) -> u32 {
     let scores = HashMap::from([('X', 1), ('Y', 2), ('Z', 3)]);
     let mut score = 0;
 
-    let opponent_play = round.chars().nth(0).unwrap();
+    let opponent_play = round.chars().next().unwrap();
     let player_play = round.chars().nth(1).unwrap();
 
     score += scores.get(&player_play).unwrap();
@@ -59,7 +59,7 @@ pub fn get_round_score_2(round: String) -> u32 {
     let round_scores = HashMap::from([('X', 0), ('Y', 3), ('Z', 6)]);
     let mut score = 0;
 
-    let opponent_play = round.chars().nth(0).unwrap();
+    let opponent_play = round.chars().next().unwrap();
     let player_play = round.chars().nth(1).unwrap();
 
     score += round_scores.get(&player_play).unwrap();

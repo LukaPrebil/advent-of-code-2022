@@ -16,12 +16,7 @@ fn get_priority(char: Option<char>) -> u32 {
 }
 
 fn find_common_letter(strs: &[&str]) -> Option<char> {
-    for char in strs[0].chars() {
-        if strs[1..].iter().all(|str| str.contains(char)) {
-            return Some(char);
-        }
-    }
-    None
+    strs[0].chars().find(|&char| strs[1..].iter().all(|str| str.contains(char)))
 }
 
 pub fn solve_1(input: &str) -> u32 {

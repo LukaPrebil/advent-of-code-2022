@@ -9,9 +9,7 @@ use std::time::Instant;
 
 // https://github.com/drmason13/advent_of_code_traits/blob/d1ade7a19d41f9a509b034bb9de0cb9d631861e6/examples/cli/main.rs
 fn main() {
-    let day = std::env::args()
-        .skip(1)
-        .next()
+    let day = std::env::args().nth(1)
         .expect(
             "Need a day to know which solution to run, e.g. `cargo run 1` to run day 1 solutions",
         )
@@ -52,9 +50,7 @@ fn find_input(day: u32) -> String {
         "src/input/2022/",
         "input/2022/",
     ]
-    .iter()
-    .filter(|path| std::path::Path::new(path).exists())
-    .next()
+    .iter().find(|path| std::path::Path::new(path).exists())
     .expect("Please run this example from a folder in or above advent-of-code-2022/src/");
 
     format!("{}/day{:02}.txt", parent_dir, day)
