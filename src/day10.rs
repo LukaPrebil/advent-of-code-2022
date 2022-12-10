@@ -1,24 +1,21 @@
 pub fn solve(input: &str) -> i32 {
     let mut screen = ['.'; 240];
-    let a = input.lines().fold((0, 1, 0), |data, instruction| {
+    let end_state = input.lines().fold((0, 1, 0), |data, instruction| {
         let (mut cycle, mut register, mut sum) = data;
         if instruction == "noop" {
             write_to_screen(&mut screen, cycle, register);
             increment_cycle(&mut cycle, &mut sum, register);
-            (cycle, register, sum)
         } else {
-            let arg = instruction[5..].parse::<i32>().unwrap();
             write_to_screen(&mut screen, cycle, register);
             increment_cycle(&mut cycle, &mut sum, register);
             write_to_screen(&mut screen, cycle, register);
             increment_cycle(&mut cycle, &mut sum, register);
-            register += arg;
-
-            (cycle, register, sum)
+            register += instruction[5..].parse::<i32>().unwrap();
         }
+        (cycle, register, sum)
     });
     print_screen(&screen);
-    a.2
+    end_state.2
 }
 
 fn increment_cycle(cycle: &mut i32, sum: &mut i32, register: i32) {
