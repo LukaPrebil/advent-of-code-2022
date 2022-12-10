@@ -1,5 +1,5 @@
 pub fn solve(input: &str) -> i32 {
-    let mut screen = ['.'; 240];
+    let mut screen = [' '; 240];
     let end_state = input.lines().fold((0, 1, 0), |data, instruction| {
         let (mut cycle, mut register, mut sum) = data;
         if instruction == "noop" {
@@ -27,7 +27,7 @@ fn increment_cycle(cycle: &mut i32, sum: &mut i32, register: i32) {
 
 fn write_to_screen(screen: &mut [char; 240], cycle: i32, register: i32) {
     if register.abs_diff(cycle % 40) <= 1 {
-        screen[cycle as usize] = '#';
+        screen[cycle as usize] = '\u{2588}';
     }
 }
 
