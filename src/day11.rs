@@ -1,4 +1,3 @@
-#[derive(Debug)]
 struct Monkey {
     inspected_times: u64,
     items: Vec<u64>,
@@ -65,29 +64,13 @@ fn parse_input(input: &str) -> Vec<Monkey> {
         .collect()
 }
 
-// fn gcd(a: u64, b: u64) -> u64 {
-//     if b == 0 {
-//         a
-//     } else {
-//         gcd(b, a % b)
-//     }
-// }
-
-// fn lcm(a: u64, b: u64) -> u64 {
-//     a * b / gcd(a, b)
-// }
-// fn lcm_of_slice(nums: &[u64]) -> u64 {
-//     nums.iter().fold(1, |acc, &x| lcm(acc, x))
-// }
-
 pub fn solve(input: &str, is_part_two: bool) -> u64 {
     let mut monkeys = parse_input(input);
 
-    let all_divisors = monkeys
+    let product_of_divisors: u64 = monkeys
         .iter()
         .map(|monkey| monkey.divisible_by)
-        .collect::<Vec<_>>();
-    let lcm_of_divisors: u64 = all_divisors.iter().product();
+        .product();
 
     let number_of_rounds = if is_part_two { 10000 } else { 20 };
 
@@ -110,7 +93,7 @@ pub fn solve(input: &str, is_part_two: bool) -> u64 {
                     _ => panic!("Unknown operation"),
                 };
                 if is_part_two {
-                    *item %= lcm_of_divisors;
+                    *item %= product_of_divisors;
                 } else {
                     *item /= 3;
                 }
@@ -128,7 +111,6 @@ pub fn solve(input: &str, is_part_two: bool) -> u64 {
             monkey.items.extend(items.iter().rev());
         }
     }
-    println!("{:#?}", monkeys);
     monkeys.sort_by_key(|monkey| monkey.inspected_times);
     monkeys
         .iter()
@@ -147,7 +129,6 @@ mod tests {
         let input =
             std::fs::read_to_string("./src/input/2022/day11-test.txt").expect("File not found");
         let result = parse_input(&input);
-        println!("{:#?}", result);
         assert_eq!(result.len(), 4);
     }
 
