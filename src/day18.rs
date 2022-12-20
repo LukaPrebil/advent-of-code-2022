@@ -60,19 +60,19 @@ fn count_neighbours(tensor: &[Vec<Vec<bool>>], x: usize, y: usize, z: usize) -> 
     count
 }
 
-fn solve_2(input: &str) -> usize {
-    let parsed = parse_input(input);
-    let border_cubes: Vec<_> = parsed.coordinates.iter().filter(|(x,y,z)| {
-        let neighbours = count_neighbours(&parsed.tensor, *x, *y, *z);
-        if neighbours < 6 && neighbours > 0  {
-            // true if can reach edge, else false
+// fn solve_2(input: &str) -> usize {
+//     let parsed = parse_input(input);
+//     let border_cubes: Vec<_> = parsed.coordinates.iter().filter(|(x,y,z)| {
+//         let neighbours = count_neighbours(&parsed.tensor, *x, *y, *z);
+//         if neighbours < 6 && neighbours > 0  {
+//             // true if can reach edge, else false
             
 
-        } else {
-            false
-        }
-    }).collect();
-}
+//         } else {
+//             false
+//         }
+//     }).collect();
+// }
 
 #[cfg(test)]
 mod tests {

@@ -9,6 +9,7 @@ mod day08;
 mod day10;
 mod day11;
 mod day18;
+mod day20;
 
 use std::time::Instant;
 
@@ -48,7 +49,7 @@ fn main() {
         10 => print_output(day, day10::solve(&input), 0),
         11 => print_output(day, day11::solve(&input, false), day11::solve(&input, true)),
         18 => print_output(day, day18::solve(&input), 0),
-
+        20 => print_output(day, day20::solve(&input, false), day20::solve(&input, true)),
         x => unimplemented!("no solution available for day {x}"),
     }
     println!("Time: {}us", start.elapsed().as_micros());
