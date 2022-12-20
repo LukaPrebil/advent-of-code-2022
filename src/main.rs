@@ -8,6 +8,7 @@ mod day07;
 mod day08;
 mod day10;
 mod day11;
+mod day18;
 
 use std::time::Instant;
 
@@ -46,6 +47,7 @@ fn main() {
         8 => print_output(day, day08::solve(&input), day08::solve_2(&input)),
         10 => print_output(day, day10::solve(&input), 0),
         11 => print_output(day, day11::solve(&input, false), day11::solve(&input, true)),
+        18 => print_output(day, day18::solve(&input), 0),
 
         x => unimplemented!("no solution available for day {x}"),
     }
